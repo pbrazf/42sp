@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prints.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcruz-pe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gcruz-pe <gcruz-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 18:45:36 by gcruz-pe          #+#    #+#             */
-/*   Updated: 2025/04/26 18:49:09 by gcruz-pe         ###   ########.fr       */
+/*   Updated: 2025/04/27 15:30:49 by gcruz-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,51 +17,59 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-//Error Message
-void	ft_putstr(char *str)
-{
-	while (*str)
-	{
-		write(1, &str, 1);
-	}
-}
-
+// Writes the error message "Error\n"
 void	ft_error(void)
 {
 	write(1, "Error\n", 6);
 }
 
-/*
-// This function receives a pointer to a string(an array of chars).
-// A counter is declared to be used as an index in the loop
-// with the purpose to print each letter from a string.
-// The '\0' char is the end of a string in C.
-// The loop continues as long it doesn't find a null char(\0)
-// The middle parameter in the write function is the address
-// from the actual char of the string
-void	ft_string(char *str)
+// Prints the inner 4x4 part of the matrix (ignores the clues at the borders).
+// - matrix: the 6x6 game matrix (including clues and game area).
+// - row: used to iterate over the rows of the matrix.
+// - col: used to iterate over the columns of the matrix.
+void	print_matrix(int matrix[6][6])
 {
-	int	count;
+	int	row;
+	int	col;
 
-	count = 0;
-	while (str[count] != '\0')
+	row = 1;
+	while (row < 5)
 	{
-		write(1, &str[count], 1);
-		count++;
+		col = 1;
+		while (col < 5)
+		{
+			if (col == 4)
+			{
+				ft_putchar(matrix[row][col] + '0');
+			}
+			else
+			{
+				ft_putchar(matrix[row][col] + '0');
+				ft_putchar(' ');
+			}
+			col++;
+		}
+		ft_putchar('\n');
+		row++;
 	}
 }
 
-// This function is used to print an error message to the user
-// It starts with the declaration of a pointer error with type char
-// and it is assigned an error message to this variable error
-// The function ft_string it's called and it begins
-// the iteration to each position of the array
-// Iteration 1: str[0] = 'I';
-void	ft_error(void)
-{
-	char	*error;
+// void	print_full_matrix(int matrix[6][6])
+// {
+// 	int	row;
+// 	int	col;
 
-	error = "Error!\n";
-	ft_string(error);
-}
-*/
+// 	row = 0;
+// 	while (row < 6)
+// 	{
+// 		col = 0;
+// 		while (col < 6)
+// 		{
+// 			ft_putchar(matrix[row][col] + '0');
+// 			ft_putchar(' ');
+// 			col++;
+// 		}
+// 		ft_putchar('\n');
+// 		row++;
+// 	}
+// }

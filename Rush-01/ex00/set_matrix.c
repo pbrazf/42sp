@@ -3,13 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   set_matrix.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcruz-pe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gcruz-pe <gcruz-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 18:54:10 by gcruz-pe          #+#    #+#             */
-/*   Updated: 2025/04/26 19:18:29 by gcruz-pe         ###   ########.fr       */
+/*   Updated: 2025/04/27 14:57:35 by gcruz-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// This function intializes the entire matrix with zeros(empty).
+// It prepares the 6x6 matrix to be ready for clues and later the solutions.
+// - row: used to iterate through the rows of the matrix.
+// - col: used to iterate through the columns of the matrix.
 void	initialize_matrix(int matrix[6][6])
 {
 	int	row;
@@ -28,7 +32,13 @@ void	initialize_matrix(int matrix[6][6])
 	}
 }
 
-void	top_clues(int matrix[6][6], int *clues)
+// Places the 16 clues around the edges of the matrix.
+// The clues are divided into top, bottom, left, and right sides.
+// Variables:
+// - matrix: the 6x6 matrix where the clues will be placed.
+// - clues: array of 16 integers containing the clues.
+// - i: used as an index to iterate through the clues.
+void	put_clues_in_matrix(int matrix[6][6], int *clues)
 {
 	int	i;
 
@@ -36,82 +46,20 @@ void	top_clues(int matrix[6][6], int *clues)
 	while (i < 4)
 	{
 		matrix[0][i + 1] = clues[i];
-		i++;
-	}
-}
-
-void	bottom_clues(int matrix[6][6], int *clues)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
 		matrix[5][i + 1] = clues[i + 4];
-		i++;
-	}
-}
-
-void	left_clues(int matrix[6][6], int *clues)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
 		matrix[i + 1][0] = clues[i + 8];
-		i++;
-	}
-}
-
-void	right_clues(int matrix[6][6], int *clues)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
 		matrix[i + 1][5] = clues[i + 12];
 		i++;
 	}
 }
 
-void	put_clues_in_matrix(int matrix[6][6], int *clues)
-{
-	top_clues(matrix, clues);
-	bottom_clues(matrix, clues);
-	left_clues(matrix, clues);
-	right_clues(matrix, clues);
-}
-
+// Builds the matrix by first initializing it with zeros
+// and then placing the clues on its borders.
+// Variables:
+// - matrix: the 6x6 matrix to be built.
+// - clues: array of 16 integers containing the clues.
 void	build_matrix(int matrix[6][6], int *clues)
 {
 	initialize_matrix(matrix);
 	put_clues_in_matrix(matrix, clues);
 }
-
-/*
-#include <stdio.h>
-int main(void)
-{
-    int clues[16] = {4, 3, 2, 1, 1, 2, 2, 2, 4, 3, 2, 1, 1, 4, 2, 2};
-    int matrix[6][6];
-    int row, col;
-
-    build_matrix(matrix, clues);
-
-    row = 0;
-    while (row < 6)
-    {
-        col = 0;
-        while (col < 6)
-        {
-            printf("%d ", matrix[row][col]);
-            col++;
-        }
-        printf("\n");
-        row++;
-    }
-    return 0;
-}
-*/

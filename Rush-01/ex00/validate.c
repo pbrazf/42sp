@@ -6,15 +6,17 @@
 /*   By: gcruz-pe <gcruz-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 19:07:28 by gcruz-pe          #+#    #+#             */
-/*   Updated: 2025/04/27 10:57:59 by gcruz-pe         ###   ########.fr       */
+/*   Updated: 2025/04/27 15:31:43 by gcruz-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h> 
-#include <malloc.h> 
 #include <stdio.h>
 #include "header.h"
 
+// Calculates and returns the length of a string.
+// - str: the input string to measure.
+// - i: counter used to iterate through the string
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -27,6 +29,12 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+// Parses the input string into the clues array.
+// Accepts only digits '1' to '4' separated by spaces.
+// - str: input string from the command line.
+// - clues: integer array to store the parsed numbers.
+// - i: index for traversing the input string.
+// - j: index for filling the clues array.
 int	*parse_to_numbers(char *str, int *clues)
 {
 	int	i;
@@ -36,9 +44,9 @@ int	*parse_to_numbers(char *str, int *clues)
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] >= '1' && str[i] <= '4' && j < 16) 
+		if (str[i] >= '1' && str[i] <= '4' && j < 16)
 		{
-			clues[j]= str[i] - '0';
+			clues[j] = str[i] - '0';
 			j++;
 		}
 		else if (str[i] != ' ')
@@ -50,6 +58,10 @@ int	*parse_to_numbers(char *str, int *clues)
 	return (clues);
 }
 
+// Counts how many times the number 4 appears in the clues array.
+// - numbers: the clues array.
+// - i: counter used to traverse the array.
+// - count: counter for number of '4' found.
 int	count_number_four(int *numbers)
 {
 	int	i;
@@ -68,6 +80,11 @@ int	count_number_four(int *numbers)
 	return (count);
 }
 
+// Checks if the sum for opposites sides(top+bottom, left+right) 
+// is a valid sum(must be <= 5).
+// - the first loop being the columns
+// - and the second loop being the lines
+// - i: index to iterate through the top-bottom and left-right clues.
 int	check_sum_of_pairs(int *numbers)
 {
 	int	i;
@@ -89,6 +106,12 @@ int	check_sum_of_pairs(int *numbers)
 	return (1);
 }
 
+// Validates the input received from the command line.
+// Checks the string length, the format of numbers and spaces, 
+// ensures 16 clues were given, and basic rules about clues are respected.
+// Variables:
+// - str: input string received from the command line.
+// - clues: array where the parsed clues will be stored.
 int	*validate_input(char *str, int *clues)
 {
 	if (ft_strlen(str) != 31)
@@ -113,11 +136,3 @@ int	*validate_input(char *str, int *clues)
 	}
 	return (clues);
 }
-
-	// int i;
-	// i = 0;
-	// while (i < 16)
-	// {
-	// 	printf("clues[%d] = %d\n", i, clues[i]);
-	// 	i++;
-	// }
