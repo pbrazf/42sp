@@ -6,7 +6,7 @@
 /*   By: pedrferr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:20:20 by pedrferr          #+#    #+#             */
-/*   Updated: 2025/04/25 15:23:21 by pedrferr         ###   ########.fr       */
+/*   Updated: 2025/04/29 09:36:11 by pedrferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strncat(char *dest, char *src, unsigned int nb)
 int	main(void)
 {
 	char	str[20] = "abc";
-	char	str1[] = "defgh"
+	char	str1[] = "defgh";
 	char	str2[] = "ijkl"; 
 
 	// Concatena no máximo 3 caracteres de str1 em str
